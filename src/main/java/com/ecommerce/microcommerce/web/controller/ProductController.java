@@ -2,6 +2,7 @@ package com.ecommerce.microcommerce.web.controller;
 
 import com.ecommerce.microcommerce.dao.ProductDao;
 import com.ecommerce.microcommerce.model.Product;
+import com.ecommerce.microcommerce.web.exceptions.ProduitGratuitException;
 import com.ecommerce.microcommerce.web.exceptions.ProduitIntrouvableException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -115,6 +116,12 @@ public class ProductController {
         }
 
         return productMargeList;
+    }
+
+    @GetMapping(value = "/Produits/orderByNom")
+    public List<Product> trierProduitsParOrdreAlphabetique(){
+        List<Product> produits = productDao.findAllByOrderByNomAsc();
+        return produits;
     }
 
 }
